@@ -1,0 +1,8 @@
+.sideBar {
+	min-height: 100vh;
+	height: 100%;
+	background-color: rgba(224, 203, 164, 0.863);
+}
+.sideBar a {
+	text-decoration: none;
+}
