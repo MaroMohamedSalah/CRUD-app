@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Add = () => {
 	const [proName, setProName] = useState("");
@@ -8,6 +9,7 @@ const Add = () => {
 	const [price, setPrice] = useState(10);
 	const [description, setDescription] = useState("");
 	const date = new Date();
+	let navigate = useNavigate();
 	const formSubmit = (e) => {
 		e.preventDefault();
 		axios
@@ -28,6 +30,9 @@ const Add = () => {
 			.then((res) => {
 				if (res.status === 201) {
 					Swal.fire("Good job!", "You add the product!", "success");
+					setTimeout(() => {
+						navigate("/products");
+					}, 2000);
 				}
 			})
 			.then((error) => console.log(error));
