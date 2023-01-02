@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
 	const getAllProduct = () => {
 		fetch("http://localhost:3000/products")
 			.then((res) => res.json())
-			.then((data) => setProducts(data));
+			.then((data) => {
+				setProducts(data);
+			});
 	};
 	useEffect(() => {
 		getAllProduct();
@@ -30,6 +31,13 @@ const Products = () => {
 					if (res.status === 200) {
 						Swal.fire("Saved!", "", "success");
 						getAllProduct();
+					} else {
+						Swal.fire({
+							icon: "error",
+							title: "Oops...",
+							text: "Something went wrong!",
+							footer: '<a href="">Why do I have this issue?</a>',
+						});
 					}
 				});
 			} else if (result.isDenied) {
